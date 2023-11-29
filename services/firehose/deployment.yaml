@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: services-firehose
+  labels:
+    app: services-firehose
+spec:
+  clusterIP: None
+  selector:
+    app: services-firehose
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: services-firehose
+  labels:
+    app: services-firehose
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: services-firehose
+  template:
+    metadata:
+      labels:
+        app: services-firehose
+    spec:
+      containers:
+      - name: services-firehose
+        image: services-firehose

@@ -1,0 +1,14 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: create-topics
+  namespace: kafka
+spec:
+  template:
+    spec:
+      containers:
+      - name: create-topics
+        image:  docker.io/bitnami/kafka:latest
+        command: ["kafka-topics.sh", "--create", "--topic", "raw_messages", "--bootstrap-server", "kafka:9092"]
+      restartPolicy: Never
+  backoffLimit: 4
